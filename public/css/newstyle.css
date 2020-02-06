@@ -1,0 +1,66 @@
+.site-btn a
+{
+    color:#fff !important;
+}
+.nav-item a
+{
+    color:#fff !important;
+
+
+}
+.nav-tabs .nav-link.active
+{
+    color:#333 !important;
+}
+.btn-outline-info
+{
+    border:01px solid #d82a4e !important;
+}
+.btn-info
+{
+    background-color:#d82a4e !important;
+}
+.site-btn1 {
+	display: inline-block;
+	text-align: center;
+	border: none;
+	padding: 05px 05px;
+	font-weight: 600;
+	font-size: 16px;
+	position: relative;
+	color: #fff;
+	cursor: pointer;
+	background: #d82a4e;
+}
+.site-btn a
+{
+    color:#fff !important;
+}
+.col-6
+{
+    width:50%;
+    display:inline-block;
+}
+.card-footer
+{
+background-color: transparent;
+}
+.border {
+display: inline-block;
+width: 100%;
+height: 30px;
+margin-right: 0px;
+}
+.card-body
+{
+    padding :02px 02px 02px 02px !important;
+
+    background-color:#fff;
+}
+.card-header
+{
+    background-color:#fff;
+}
+.hero-section {
+	height: 500px !important;
+}

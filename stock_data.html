@@ -1,0 +1,218 @@
+<html>
+ <head>
+  </title>
+  <META HTTP-EQUIV="Pragma" CONTENT="no-cache">
+  <META HTTP-EQUIV="Expires" CONTENT="-1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+
+  <!-- jQuery library -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  
+  <!-- Latest compiled JavaScript -->
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+  <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+  <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+ <!-- <script type="text/javascript" src="/json.js"></script> -->
+
+<script src="/code/highcharts.js"></script>
+<script src="/code/modules/series-label.js"></script>
+<script src="/code/modules/exporting.js"></script>
+<script src="/code/modules/export-data.js"></script>
+<link rel="stylesheet" type="text/css" href="/style.css">
+<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/fontawesome.min.css">
+
+
+      
+
+<!-- Script to get JSON file and display its content --> 
+
+</head>
+<body>
+
+
+    <div class="row">
+      <div class="col-sm-2 sidebar text-left">
+        <ul class="nav-item">
+            <li class="nav-items"><img src="/img/stock-earnings.png" height="44px;" width="114px;">Stockopedia</li>
+            <li class="nav-items"><i class="fa fa-home"></i><a style="color:#fff;" href="/">Home</a></li>
+            <li class="nav-items"><i class="fa fa-home"></i><a style="color:#fff;" href="/stock_data">Stock</a> </li>
+            <li class="nav-items"><i class="fa fa-home"></i><a style="color:#fff;" href="/about">About</a></li>
+            
+        </ul>
+      </div>
+        <div class="col-sm-10 text-center">
+          <h3 class="text-muted abc1">Stock Results For </h3>
+          <div class="row">
+              <div class="col-sm-12">
+                  <table class="table table-bordered">
+                      <thead>
+                      <tr>
+                      <th>Open</th>
+                      <th>High</th>
+                      <th>Low</th>
+                      <th>Close</th>
+                      </tr>
+                      </thead>
+                      <tbody>
+                      <tr>
+                      
+                      <td id="open"></td>
+                      <td id="high"></td>
+                      
+                      <td id="low"></td>
+                      
+                      <td id="close"></td>
+                      
+                      </tr>
+                      </tbody>
+                    </table>
+        
+              </div> 
+              <div class="col-sm-12">
+                <div id="chart_div" style="width: 100%; height: 500px;"></div>
+              </div>
+
+          </div>
+        </div>
+    
+    </div>
+
+
+
+
+
+                 
+                
+                  
+
+</script>      
+
+                <script type="text/javascript">
+                
+                    var date = [];
+                    var open = []; 
+                    var high = [];
+                    var low = [];
+                    var close = [];
+                    
+                    $.getJSON('/json_demo1.json', function(emp1) { 
+                        
+                        
+                        
+                        
+                        
+                        var i =0;
+                        
+                        for(var key in emp1)
+                        {
+                            if(key == 'Time Series (Daily)')
+                            {
+                                let y = emp1[key];
+                                for(z in y)
+                                {
+                                    date.push(z);
+                                    console.log(date[i]);
+                                    let a = y[z];
+                                    
+                                    for(b in a)
+                                    {
+                                        if(b == '1. open')
+                                        {
+                                            open.push(a[b]);
+                                        }
+                                        else if(b == '2. high')
+                                        {
+                                            high.push(a[b]);
+                                        }
+                                        else if(b == '3. low')
+                                        {
+                                            low.push(a[b]);
+                                            console.log(low[i])
+                                        }
+                                        else if(b == '4. close')
+                                        {
+                                            close.push(a[b]);
+                                        }
+                                        else
+                                        {
+
+                                        }
+                                    }
+                                }
+                              
+                                
+
+                            }
+                            else if(key == 'Meta Data')
+                            {
+                              let cd = emp1[key];
+                              for(jp in cd)
+                              {
+                                if(jp == '2. Symbol')
+                                {
+                                  $('.abc1').append(cd[jp]);
+                                }
+                              }
+                            }
+                            i=i+1;
+                            
+                                
+
+                        }
+                        $('#high').append(high[0]);
+                        $('#open').append(open[0]);
+                        $('#low').append(low[0]);
+                        $('#close').append(close[0]);
+                        
+                          
+                    });
+                        
+                        
+                        
+                    
+                      
+                      
+                 
+                  
+                  
+                //   var table_data = [[open[0],high[0],low[0],close[0]],
+                //                    [open[0],high[1],low[1],close[1]]
+                //                 ];
+                //  console.log(...table_data);
+                    
+                    google.charts.load('current', {'packages':['corechart']});
+                    google.charts.setOnLoadCallback(drawChart);
+              
+                function drawChart() {
+                  
+                  var data = google.visualization.arrayToDataTable([
+                    [date[0], parseFloat(high[0]), parseFloat(open[0]), parseFloat(close[0]), parseFloat(low[0])],
+                    [date[1], parseFloat(high[1]), parseFloat(open[1]), parseFloat(close[1]), parseFloat(low[1])],
+                    [date[2], parseFloat(high[2]), parseFloat(open[2]), parseFloat(close[2]), parseFloat(low[2])],
+                    [date[3], parseFloat(high[3]), parseFloat(open[3]), parseFloat(close[4]), parseFloat(low[4])],
+                    [date[4], parseFloat(high[4]), parseFloat(open[4]), parseFloat(close[4]), parseFloat(low[4])],
+                    [date[5], parseFloat(high[5]), parseFloat(open[5]), parseFloat(close[5]), parseFloat(low[5])],
+                    [date[6], parseFloat(high[6]), parseFloat(open[6]), parseFloat(close[6]), parseFloat(low[6])],
+                    [date[7], parseFloat(high[7]), parseFloat(open[7]), parseFloat(close[7]), parseFloat(low[7])],
+                    [date[8], parseFloat(high[8]), parseFloat(open[8]), parseFloat(close[8]), parseFloat(low[8])],
+                    [date[9], parseFloat(high[9]), parseFloat(open[9]), parseFloat(close[9]), parseFloat(low[9])]
+                    
+                    // Treat first row as data as well.
+                  ], true);
+              
+                  var options = {
+                    legend:'none',
+                    candlestick: {
+                    fallingColor: { strokeWidth: 0, fill: '#a52714' }, // red
+                    risingColor: { strokeWidth: 0, fill: '#0f9d58' }   // green
+                    }
+                  };
+              
+                  var chart = new google.visualization.CandlestickChart(document.getElementById('chart_div'));
+              
+                  chart.draw(data, options);
+                }
+                  </script>
+
+ </body>
+</html>
